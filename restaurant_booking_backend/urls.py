@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from core.views import CityViewSet
+from core.views import CityViewSet, CuisineViewSet
+
 
 router = routers.DefaultRouter()
 router.register(r'city', CityViewSet)
+router.register(r'cuisine', CuisineViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
