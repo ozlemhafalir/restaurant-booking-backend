@@ -19,11 +19,13 @@ from django.urls import path, include
 from rest_framework import routers
 
 from core.views import CityViewSet, CuisineViewSet
-
+from restaurant.views import RestaurantViewSet
 
 router = routers.DefaultRouter()
 router.register(r'city', CityViewSet)
 router.register(r'cuisine', CuisineViewSet)
+router.register(r'restaurant', RestaurantViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
