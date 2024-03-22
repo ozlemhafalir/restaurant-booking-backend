@@ -13,7 +13,7 @@ class Reservation(models.Model):
     date = models.DateField()
     guests = models.IntegerField()
     note = models.TextField()
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='restaurant')
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='reservations')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     created_on = models.DateTimeField(auto_now_add=True)
