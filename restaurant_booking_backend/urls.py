@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework_simplejwt import views as jwt_views
 
 from core.views import CityViewSet, CuisineViewSet
 from reservation.views import ReservationViewSet
@@ -31,5 +32,7 @@ router.register(r'reservation', ReservationViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('token/', jwt_views.TokenObtainPairView.as_view(),name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(),name='token_refresh'),
     path('api/', include(router.urls))
 ]

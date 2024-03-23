@@ -14,3 +14,4 @@ class RestaurantViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     ordering_fields = ['name', 'created_on', 'popularity']
     filterset_fields = ['city', 'cuisines']
+
