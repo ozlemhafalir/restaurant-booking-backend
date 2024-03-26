@@ -20,6 +20,7 @@ from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
 from core.views import CityViewSet, CuisineViewSet
+from management.views import ProfileViewSet
 from reservation.views import ReservationViewSet
 from restaurant.views import RestaurantViewSet
 
@@ -28,7 +29,7 @@ router.register(r'city', CityViewSet)
 router.register(r'cuisine', CuisineViewSet)
 router.register(r'restaurant', RestaurantViewSet)
 router.register(r'reservation', ReservationViewSet)
-
+router.register(r'profile', ProfileViewSet, basename='profile')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
