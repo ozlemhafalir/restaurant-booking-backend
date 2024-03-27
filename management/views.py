@@ -1,6 +1,7 @@
 from rest_framework import viewsets, permissions, response, status
 
-from management.serializers import ProfileSerializer
+from management.serializers import ProfileSerializer, ReservationSerializer
+from reservation.models import Reservation
 
 
 class ProfileViewSet(viewsets.ViewSet):
@@ -26,3 +27,12 @@ class ProfileViewSet(viewsets.ViewSet):
             serializer.save()
             return response.Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProfileReservationViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ReservationSerializer
+
+
+    def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user).all()

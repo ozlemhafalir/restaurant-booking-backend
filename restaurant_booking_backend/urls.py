@@ -20,7 +20,7 @@ from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
 from core.views import CityViewSet, CuisineViewSet
-from management.views import ProfileViewSet
+from management.views import ProfileViewSet, ProfileReservationViewSet
 from reservation.views import ReservationViewSet
 from restaurant.views import RestaurantViewSet
 
@@ -30,10 +30,11 @@ router.register(r'cuisine', CuisineViewSet)
 router.register(r'restaurant', RestaurantViewSet)
 router.register(r'reservation', ReservationViewSet)
 router.register(r'profile', ProfileViewSet, basename='profile')
+router.register(r'profile-reservation', ProfileReservationViewSet, basename='profile_reservation')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('token/', jwt_views.TokenObtainPairView.as_view(),name='token_obtain_pair'),
-    path('token/refresh/', jwt_views.TokenRefreshView.as_view(),name='token_refresh'),
+    path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls))
 ]

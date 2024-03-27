@@ -6,4 +6,4 @@ from reservation.models import Reservation
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ['date', 'guests', 'note', 'restaurant', 'user', 'status', 'created_on']
+        fields = ['date', 'guests', 'note', 'restaurant', 'user', 'status']
