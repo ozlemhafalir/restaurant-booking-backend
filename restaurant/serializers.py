@@ -1,10 +1,12 @@
 from rest_framework import serializers
 
+from core.serializers import CuisineSerializer
 from restaurant.models import Restaurant
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
     city_name = serializers.ReadOnlyField(source='city.name')
+    cuisines = CuisineSerializer(many=True, read_only=True)
     class Meta:
         model = Restaurant
         fields = ['id', 'name', 'slug', 'description', 'address', 'city', 'cuisines', 'status', 'owner', 'menu',
