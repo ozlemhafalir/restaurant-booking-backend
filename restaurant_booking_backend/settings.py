@@ -70,7 +70,7 @@ MIDDLEWARE = [
 ]
 CORS_ALLOW_HEADERS = list(default_headers)
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'https://restaurant-booking-client.vercel.app']
 
 ROOT_URLCONF = 'restaurant_booking_backend.urls'
 
