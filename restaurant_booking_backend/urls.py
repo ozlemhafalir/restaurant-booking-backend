@@ -23,12 +23,13 @@ from core.views import CityViewSet, CuisineViewSet
 from management.views import ProfileViewSet, ProfileReservationViewSet, OwnerRestaurantViewSet, \
     OwnerRestaurantReservationViewSet
 from reservation.views import ReservationViewSet
-from restaurant.views import RestaurantViewSet
+from restaurant.views import RestaurantViewSet, RegisterRestaurantViewSet
 
 router = routers.DefaultRouter()
 router.register(r'city', CityViewSet)
 router.register(r'cuisine', CuisineViewSet)
 router.register(r'restaurant', RestaurantViewSet)
+router.register(r'register-restaurant', RegisterRestaurantViewSet, basename='register_restaurant')
 router.register(r'reservation', ReservationViewSet)
 router.register(r'profile', ProfileViewSet, basename='profile')
 router.register(r'profile-reservation', ProfileReservationViewSet, basename='profile_reservation')
