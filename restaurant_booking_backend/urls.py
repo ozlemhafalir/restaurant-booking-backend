@@ -24,6 +24,7 @@ from management.views import ProfileViewSet, ProfileReservationViewSet, OwnerRes
     OwnerRestaurantReservationViewSet
 from reservation.views import ReservationViewSet
 from restaurant.views import RestaurantViewSet, RegisterRestaurantViewSet
+from restaurant_booking_backend.views import RegisterViewSet
 
 router = routers.DefaultRouter()
 router.register(r'city', CityViewSet)
@@ -36,6 +37,7 @@ router.register(r'profile-reservation', ProfileReservationViewSet, basename='pro
 router.register(r'owner-restaurant', OwnerRestaurantViewSet, basename='owner_restaurant')
 router.register(r'owner-restaurant/(?P<restaurant_pk>\d+)/reservation', OwnerRestaurantReservationViewSet,
                 basename='owner_restaurant_reservation')
+router.register(r'register', RegisterViewSet, basename='register')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
