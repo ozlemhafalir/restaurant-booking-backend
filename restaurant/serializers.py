@@ -15,11 +15,12 @@ class RestaurantSerializer(serializers.ModelSerializer):
     city_name = serializers.ReadOnlyField(source='city.name')
     cuisines = CuisineSerializer(many=True, read_only=True)
     images = RestaurantImageSerializer(many=True, read_only=True)
+    menu_url = serializers.ReadOnlyField(source='menu.url')
 
     class Meta:
         model = Restaurant
         fields = ['id', 'name', 'slug', 'description', 'address', 'city', 'cuisines', 'status', 'owner', 'menu',
-                  'created_on', 'updated_on', 'city_name', 'images']
+                  'created_on', 'updated_on', 'city_name', 'images', 'menu_url']
 
 class RegisterRestaurantSerializer(serializers.ModelSerializer):
     class Meta:
