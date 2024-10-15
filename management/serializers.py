@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from core.serializers import UserSerializer
 from reservation.models import Reservation
 from restaurant.models import Restaurant
+from restaurant.serializers import RestaurantSerializer
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -12,14 +13,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ['id', 'username', 'email', 'first_name', 'last_name']
         read_only_fields = ['id', 'username', 'email']
-
-
-class RestaurantSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Restaurant
-        fields = ['id', 'name', 'slug', 'description', 'address', 'city', 'cuisines', 'status', 'owner', 'menu',
-                  'created_on', 'updated_on']
-        read_only_fields = ['owner']
 
 
 class ReservationSerializer(serializers.ModelSerializer):
