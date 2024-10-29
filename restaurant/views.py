@@ -2,6 +2,7 @@ from django.db.models import Count
 
 from rest_framework import viewsets, filters, status
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser, MultiPartParser
 from django_filters.rest_framework import DjangoFilterBackend
 
 from restaurant.models import Restaurant
@@ -12,6 +13,7 @@ from slugify import slugify
 
 class RestaurantViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Restaurant.objects.annotate(popularity=Count('reservations')).all()
+    parser_classes = [JSONParser, MultiPartParser]
     serializer_class = RestaurantSerializer
     lookup_field = 'slug'
     permission_classes = [IsOwnerOrReadOnly]
