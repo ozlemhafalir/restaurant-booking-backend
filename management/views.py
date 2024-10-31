@@ -1,8 +1,9 @@
 from rest_framework import viewsets, permissions, response, status
 
-from management.serializers import ProfileSerializer, ReservationSerializer, RestaurantSerializer
+from management.serializers import ProfileSerializer, ReservationSerializer, RestaurantSerializer, \
+    RestaurantImageSerializer
 from reservation.models import Reservation
-from restaurant.models import Restaurant
+from restaurant.models import Restaurant, RestaurantImage
 
 
 class ProfileViewSet(viewsets.ViewSet):
@@ -53,3 +54,12 @@ class OwnerRestaurantReservationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         restaurant_pk = self.kwargs['restaurant_pk']
         return Reservation.objects.filter(restaurant__id=restaurant_pk, restaurant__owner=self.request.user).all()
+
+
+class OwnerRestaurantImageViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = RestaurantImageSerializer
+
+    def get_queryset(self):
+        restaurant_pk = self.kwargs['restaurant_pk']
+        return RestaurantImage.objects.filter(restaurant__id=restaurant_pk, restaurant__owner=self.request.user).all()

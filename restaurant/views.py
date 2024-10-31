@@ -13,7 +13,6 @@ from slugify import slugify
 
 class RestaurantViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Restaurant.objects.annotate(popularity=Count('reservations')).all()
-    parser_classes = [JSONParser, MultiPartParser]
     serializer_class = RestaurantSerializer
     lookup_field = 'slug'
     permission_classes = [IsOwnerOrReadOnly]
