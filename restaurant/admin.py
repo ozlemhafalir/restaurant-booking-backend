@@ -10,6 +10,7 @@ class RestaurantImageInline(admin.StackedInline):
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
     search_fields = ("name", "slug", )
+    list_filter = ("cuisines", )
     inlines = (RestaurantImageInline, )
 
 

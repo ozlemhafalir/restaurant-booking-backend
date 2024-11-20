@@ -16,9 +16,10 @@ class RestaurantViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = RestaurantSerializer
     lookup_field = 'slug'
     permission_classes = [IsOwnerOrReadOnly]
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['name', 'created_on', 'popularity']
     filterset_fields = ['city', 'cuisines']
+    search_fields = ['name']
 
 class RegisterRestaurantViewSet(viewsets.ViewSet):
     queryset = Restaurant.objects.all()
