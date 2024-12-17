@@ -1,5 +1,6 @@
 from rest_framework import viewsets, permissions, response, status
 
+from core.models import Cuisine
 from management.serializers import ProfileSerializer, ReservationSerializer, RestaurantSerializer, \
     RestaurantImageSerializer
 from reservation.models import Reservation
@@ -45,6 +46,22 @@ class OwnerRestaurantViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Restaurant.objects.filter(owner=self.request.user).all()
+
+    def extract_cuisine_ids_from_request_data(self, data):
+        cuisine_ids = []
+        for key, value in data.items():
+            if (key.startswith('cuisines[') and key.endswith('][id]')):
+                cuisine_ids.append(value)
+        return cuisine_ids
+
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, args, kwargs)
+        instance = self.get_object()
+        cuisine_ids = self.extract_cuisine_ids_from_request_data(request.data)
+        cuisines = Cuisine.objects.filter(id__in=cuisine_ids)
+        instance.cuisines.set(cuisines)
+        instance.save()
+        return response
 
 
 class OwnerRestaurantReservationViewSet(viewsets.ModelViewSet):

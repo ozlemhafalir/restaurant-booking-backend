@@ -11,9 +11,10 @@ class CityViewSet(viewsets.ModelViewSet):
     queryset = City.objects.all()
     serializer_class = CitySerializer
     permission_classes = [IsAdminOrReadOnly]
-
+    pagination_class = None
 
 class CuisineViewSet(viewsets.ModelViewSet):
     queryset = Cuisine.objects.all()
     serializer_class = CuisineSerializer
     permission_classes = [IsAdminOrReadOnly]
+    pagination_class = None
