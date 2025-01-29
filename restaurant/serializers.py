@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from cloudinary import CloudinaryImage
 
 from core.serializers import CuisineSerializer
 from restaurant.models import Restaurant, RestaurantImage
@@ -6,9 +7,13 @@ from restaurant.models import Restaurant, RestaurantImage
 
 class RestaurantImageSerializer(serializers.ModelSerializer):
     image_url = serializers.ReadOnlyField(source='image.url')
+    thumbnail_url = serializers.SerializerMethodField()
+
+    def get_thumbnail_url(self, obj):
+        return obj.image.build_url(height=300)
     class Meta:
         model = RestaurantImage
-        fields = ['id', 'restaurant', 'image', 'image_url']
+        fields = ['id', 'restaurant', 'image', 'image_url', 'thumbnail_url']
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
