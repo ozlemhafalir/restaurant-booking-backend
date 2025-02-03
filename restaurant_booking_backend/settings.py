@@ -165,6 +165,7 @@ USE_TZ = True
 
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL'),
+    'SECURE': True,
 }
 MEDIA_URL = '/restaurant-booking-media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
