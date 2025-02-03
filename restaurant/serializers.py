@@ -6,11 +6,14 @@ from restaurant.models import Restaurant, RestaurantImage
 
 
 class RestaurantImageSerializer(serializers.ModelSerializer):
-    image_url = serializers.ReadOnlyField(source='image.url')
+    image_url = serializers.SerializerMethodField()
     thumbnail_url = serializers.SerializerMethodField()
 
+    def get_image_url(self, obj):
+        return obj.image.build_url(secure=True)
+
     def get_thumbnail_url(self, obj):
-        return obj.image.build_url(height=300)
+        return obj.image.build_url(height=300, secure=True)
     class Meta:
         model = RestaurantImage
         fields = ['id', 'restaurant', 'image', 'image_url', 'thumbnail_url']
