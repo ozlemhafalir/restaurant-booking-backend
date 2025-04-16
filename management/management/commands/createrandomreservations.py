@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         count = options["count"]
-        print(f"Generating {count} reservations...")
+        self.stdout.write(f"Generating {count} reservations...")
         users = list(User.objects.all())
         restaurants = list(Restaurant.objects.all())
         for i in range(count):
@@ -32,4 +32,4 @@ class Command(BaseCommand):
                 user=user,
                 status=status
             )
-            print(f"Created reservation for, user: {user.username}, restaurant: {restaurant.name}, date: {date}, status: {status}")
+            self.stdout.write(f"Created reservation for, user: {user.username}, restaurant: {restaurant.name}, date: {date}, status: {status}")
