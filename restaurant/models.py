@@ -21,6 +21,7 @@ class Restaurant(models.Model):
     menu = CloudinaryField('image', default='placeholder')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    is_featured = models.BooleanField(default=False)
 
     @property
     def cuisine_names(self):
